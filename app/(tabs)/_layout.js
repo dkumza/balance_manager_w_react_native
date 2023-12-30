@@ -8,12 +8,12 @@ const TabsLayout = () => {
          <Tabs.Screen
             name="index"
             options={{
-               headerTitle: 'Balance',
-               title: 'Balance',
+               headerTitle: 'Overview',
+               title: 'Overview',
                headerStatusBarHeight: 1,
                headerTitleAlign: 'center',
-               headerStyle: { backgroundColor: '#a7f3d0' },
-               tabBarStyle: { backgroundColor: '#a7f3d0' },
+               headerStyle: { backgroundColor: '#ccfbf1' },
+               tabBarStyle: { backgroundColor: '#ccfbf1' },
                tabBarLabelStyle: { color: 'black' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
@@ -28,11 +28,11 @@ const TabsLayout = () => {
             name="new"
             options={{
                headerTitle: 'Manage Expenses',
-               title: 'Expenses',
+               title: 'Manage',
                headerStatusBarHeight: 1,
                headerTitleAlign: 'center',
-               headerStyle: { backgroundColor: '#99f6e4' },
-               tabBarStyle: { backgroundColor: '#99f6e4', color: 'black' },
+               headerStyle: { backgroundColor: '#cffafe' },
+               tabBarStyle: { backgroundColor: '#cffafe', color: 'black' },
                tabBarLabelStyle: { color: 'black' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
