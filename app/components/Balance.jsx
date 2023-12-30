@@ -7,12 +7,12 @@ export default function Balance() {
          </View>
          <View style={styles.diffWrap}>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}>€ -1000</Text>
-               <Text style={styles.diffTxt1}>Total Spent</Text>
+               <Text style={styles.diffTxt}> -1000</Text>
+               <Text style={styles.diffTxt1}>Total Spent €</Text>
             </View>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}>€ 2000</Text>
-               <Text style={styles.diffTxt2}>Total Income</Text>
+               <Text style={styles.diffTxt}> 2000</Text>
+               <Text style={styles.diffTxt2}>Total Income €</Text>
             </View>
          </View>
       </View>

@@ -2,16 +2,19 @@ import { StyleSheet, Text, View, SafeAreaView, ScrollView } from 'react-native';
 
 import Balance from '../components/Balance';
 import History from '../components/History';
+import { ExpProvider } from '../components/ExpContext';
 
 export default function Index() {
    return (
-      <SafeAreaView style={styles.container}>
-         <ScrollView showsVerticalScrollIndicator={false}>
-            {/* Information about balance */}
-            <Balance />
-            <History />
-         </ScrollView>
-      </SafeAreaView>
+      <ExpProvider>
+         <SafeAreaView style={styles.container}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+               {/* Information about balance */}
+               <Balance />
+               <History />
+            </ScrollView>
+         </SafeAreaView>
+      </ExpProvider>
    );
 }
 
