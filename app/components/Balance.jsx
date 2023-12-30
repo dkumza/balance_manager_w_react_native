@@ -11,12 +11,12 @@ export default function Balance() {
          </View>
          <View style={styles.diffWrap}>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}> {negatives}</Text>
-               <Text style={styles.diffTxt1}>Total Spent €</Text>
+               <Text style={styles.diffTxt01}> {positives}</Text>
+               <Text style={styles.diffTxt2}>Total Income €</Text>
             </View>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}> {positives}</Text>
-               <Text style={styles.diffTxt2}>Total Income €</Text>
+               <Text style={styles.diffTxt0}> {negatives}</Text>
+               <Text style={styles.diffTxt1}>Total Spent €</Text>
             </View>
          </View>
       </View>
@@ -70,9 +70,13 @@ const styles = StyleSheet.create({
       elevation: 5,
    },
 
-   diffTxt: {
-      fontSize: 38,
-      color: '#334155',
+   diffTxt0: {
+      fontSize: 32,
+      color: '#f43f5e',
+   },
+   diffTxt01: {
+      fontSize: 32,
+      color: '#84cc16',
    },
    diffTxt1: {
       color: '#f43f5e',

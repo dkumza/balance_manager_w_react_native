@@ -1,6 +1,18 @@
 import { Picker } from '@react-native-picker/picker';
+import DateTimePicker from '@react-native-community/datetimepicker';
+
+import { FontAwesome } from '@expo/vector-icons';
+
 import { useState } from 'react';
-import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
+import {
+   Text,
+   View,
+   TextInput,
+   Pressable,
+   StyleSheet,
+   SafeAreaView,
+   Button,
+} from 'react-native';
 
 const shadow = {
    borderWidth: 1,
@@ -17,8 +29,31 @@ const shadow = {
    elevation: 5,
 };
 
+let today = new Date();
+let todayDate =
+   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+
 export default function New() {
    const [selectedLanguage, setSelectedLanguage] = useState();
+   const [date, setDate] = useState(new Date(1598051730000));
+   const [mode, setMode] = useState('date');
+   const [show, setShow] = useState(false);
+
+   const onChange = (event, selectedDate) => {
+      const currentDate = selectedDate;
+      setShow(false);
+      setDate(currentDate);
+   };
+
+   const showMode = (currentMode) => {
+      setShow(true);
+      setMode(currentMode);
+   };
+
+   const showDatepicker = () => {
+      showMode('date');
+   };
+
    return (
       <View style={styles.container}>
          <View>
@@ -52,7 +87,35 @@ export default function New() {
             </View>
             <View style={{ flex: 2 }}>
                <Text style={{ marginVertical: 5 }}>Pick date</Text>
-               <TextInput style={styles.txt1} />
+               <Pressable
+                  onPress={showDatepicker}
+                  style={({ pressed }) => [
+                     {
+                        backgroundColor: pressed ? '#54c2ff' : '#418fff',
+                     },
+                     styles.txt1,
+                  ]}
+               >
+                  {show && (
+                     <DateTimePicker
+                        testID="dateTimePicker"
+                        value={date}
+                        mode={mode}
+                        is24Hour={true}
+                        onChange={onChange}
+                     />
+                  )}
+                  <View
+                     style={{
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                     }}
+                  >
+                     <Text style={styles.textDate}>{todayDate}</Text>
+                     <FontAwesome name="calendar" size={12} color="black" />
+                  </View>
+               </Pressable>
             </View>
          </View>
          <View
@@ -86,16 +149,19 @@ const styles = StyleSheet.create({
       backgroundColor: '#f8fafc',
    },
    txt1: {
+      // alignItems: 'center',
+      justifyContent: 'center',
       height: 53.5,
       fontSize: 16,
       paddingHorizontal: 18,
       ...shadow,
    },
+
    button: {
       alignItems: 'center',
       justifyContent: 'center',
       paddingVertical: 14,
-      paddingHorizontal: 24,
+      // paddingHorizontal: 5,
       borderRadius: 10,
       elevation: 3,
       width: '50%',
@@ -107,5 +173,12 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'white',
+   },
+   textDate: {
+      fontSize: 16,
+      lineHeight: 21,
+      // fontWeight: 'bold',
+      letterSpacing: 0.25,
+      color: 'black',
    },
 });
