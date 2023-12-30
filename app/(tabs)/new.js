@@ -5,12 +5,6 @@ export default function New() {
    return (
       <View>
          <Text className="">New Page</Text>
-         {/* <Link href="/">Home</Link> */}
-         {/* <Link href="/" asChild>
-            <Pressable>
-               <Text>Home</Text>
-            </Pressable>
-         </Link> */}
       </View>
    );
 }

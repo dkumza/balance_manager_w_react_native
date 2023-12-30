@@ -8,10 +8,11 @@ const TabsLayout = () => {
          <Tabs.Screen
             name="index"
             options={{
-               headerTitle: 'Balance Page',
+               headerTitle: 'Balance',
                title: 'Balance',
                headerTitleAlign: 'center',
-               headerStyle: { backgroundColor: '#f0f9ff' },
+               headerStyle: { backgroundColor: '#a7f3d0' },
+               tabBarStyle: { backgroundColor: '#a7f3d0' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
                      name="balance-scale"
@@ -27,7 +28,8 @@ const TabsLayout = () => {
                headerTitle: 'Manage Expenses',
                title: 'Expenses',
                headerTitleAlign: 'center',
-               headerStyle: { backgroundColor: '#f0f9ff' },
+               headerStyle: { backgroundColor: '#99f6e4' },
+               tabBarStyle: { backgroundColor: '#99f6e4' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
                      name="money"
