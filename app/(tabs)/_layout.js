@@ -10,14 +10,16 @@ const TabsLayout = () => {
             options={{
                headerTitle: 'Balance',
                title: 'Balance',
+               headerStatusBarHeight: 1,
                headerTitleAlign: 'center',
                headerStyle: { backgroundColor: '#a7f3d0' },
                tabBarStyle: { backgroundColor: '#a7f3d0' },
+               tabBarLabelStyle: { color: 'black' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
                      name="balance-scale"
                      size={18}
-                     color={focused ? '#2563eb' : 'gray'}
+                     color={focused ? 'black' : 'gray'}
                   />
                ),
             }}
@@ -27,14 +29,16 @@ const TabsLayout = () => {
             options={{
                headerTitle: 'Manage Expenses',
                title: 'Expenses',
+               headerStatusBarHeight: 1,
                headerTitleAlign: 'center',
                headerStyle: { backgroundColor: '#99f6e4' },
-               tabBarStyle: { backgroundColor: '#99f6e4' },
+               tabBarStyle: { backgroundColor: '#99f6e4', color: 'black' },
+               tabBarLabelStyle: { color: 'black' },
                tabBarIcon: ({ focused, color, size }) => (
                   <FontAwesome
                      name="money"
                      size={18}
-                     color={focused ? '#2563eb' : 'gray'}
+                     color={focused ? 'black' : 'gray'}
                   />
                ),
             }}
