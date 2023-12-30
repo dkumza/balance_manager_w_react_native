@@ -1,17 +1,21 @@
+import { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { ExpContext } from './ExpContext';
+
 export default function Balance() {
+   const { balance, positives, negatives } = useContext(ExpContext);
    return (
       <View>
          <View style={styles.totalWrap}>
-            <Text style={styles.totalTxt}>€ 2000</Text>
+            <Text style={styles.totalTxt}>€ {balance}</Text>
          </View>
          <View style={styles.diffWrap}>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}> -1000</Text>
+               <Text style={styles.diffTxt}> {negatives}</Text>
                <Text style={styles.diffTxt1}>Total Spent €</Text>
             </View>
             <View style={styles.diffWrap1}>
-               <Text style={styles.diffTxt}> 2000</Text>
+               <Text style={styles.diffTxt}> {positives}</Text>
                <Text style={styles.diffTxt2}>Total Income €</Text>
             </View>
          </View>
