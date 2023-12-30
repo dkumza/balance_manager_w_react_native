@@ -3,10 +3,16 @@ import { createContext, useEffect, useState } from 'react';
 
 export const ExpContext = createContext();
 
-const BASE_URL =
-   Platform.OS === 'android'
-      ? 'http://10.0.2.2:3000/api'
-      : 'http://localhost:3000/api';
+let BASE_URL;
+// check if connecting from local pc or from physical device
+if (__DEV__) {
+   BASE_URL =
+      Platform.OS === 'android'
+         ? 'http://192.168.32.84:3000/api'
+         : 'http://192.168.32.84:3000/api';
+} else {
+   BASE_URL = 'http://localhost:3000/api';
+}
 
 let today = new Date();
 let todayDate =
