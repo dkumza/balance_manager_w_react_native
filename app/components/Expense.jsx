@@ -1,6 +1,9 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Pressable } from 'react-native';
+import { useNavigation } from 'expo-router';
 
 import { Ionicons } from '@expo/vector-icons';
+import { useContext } from 'react';
+import { ExpContext } from './ExpContext';
 
 const getCategoryInfo = (category) => {
    switch (category) {
@@ -28,9 +31,20 @@ const getCategoryInfo = (category) => {
 };
 
 export default function Expense({ exp }) {
+   const { handleEdit } = useContext(ExpContext);
+   const navigation = useNavigation();
+
    const iconClass = getCategoryInfo(exp.cat_id);
+
    return (
-      <View key={exp.id} style={styles.liWrap}>
+      <Pressable
+         key={exp.id}
+         style={styles.liWrap}
+         onPress={() => {
+            handleEdit(exp.id);
+            navigation.navigate('new'); // navigate to inputs page
+         }}
+      >
          <View style={styles.liLeft}>
             <View>
                <Text>{iconClass[0]}</Text>
@@ -55,7 +69,7 @@ export default function Expense({ exp }) {
                {exp.amount} EUR
             </Text>
          </View>
-      </View>
+      </Pressable>
    );
 }
 const styles = StyleSheet.create({

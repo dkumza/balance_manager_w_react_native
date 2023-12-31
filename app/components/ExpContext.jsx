@@ -23,6 +23,7 @@ export const ExpProvider = ({ children }) => {
    const [negatives, setNegatives] = useState(0);
    const [refreshing, setRefreshing] = useState(false);
    const [successMsg, setSuccessMsg] = useState(false);
+   const [showMsg, setShowMsg] = useState(false);
 
    let todayDate;
    if (date.length === 10) {
@@ -84,6 +85,21 @@ export const ExpProvider = ({ children }) => {
       }, 1000);
    }, []);
 
+   const msgShow = () => {
+      if (!title.trim()) {
+         Alert.alert('Warning:', 'Please fill comment input', [{ text: 'OK' }]);
+
+         return false;
+      }
+      if (!amount.trim()) {
+         Alert.alert('Warning:', 'Please enter transaction amount', [
+            { text: 'OK' },
+         ]);
+         return false;
+      }
+      return true;
+   };
+
    const handleRefresh = () => {
       // fetch expenses from DB on page load
       fetchData();
@@ -93,14 +109,8 @@ export const ExpProvider = ({ children }) => {
    const submitHandler = (e) => {
       e.preventDefault();
 
-      if (!title.trim()) {
-         Alert.alert('Warning:', 'Please fill comment input', [{ text: 'OK' }]);
-         return;
-      }
-      if (!amount.trim()) {
-         Alert.alert('Warning:', 'Please enter transaction amount', [
-            { text: 'OK' },
-         ]);
+      // if inputs are empty return
+      if (!msgShow()) {
          return;
       }
 
@@ -143,7 +153,7 @@ export const ExpProvider = ({ children }) => {
    const handleFormFill = (id) => {
       const found = expenses.find((exp) => exp.id === id); // if user exists fill input fields
       setCat(found.cat_id);
-      setAmount(found.amount);
+      setAmount(found.amount.toString());
       setTitle(found.comment);
       setDate(found.date);
       setId(found.id);
@@ -158,10 +168,16 @@ export const ExpProvider = ({ children }) => {
    // handles Edit expense
    const handleSubmitEdit = (e) => {
       e.preventDefault();
+
+      // if inputs are empty return
+      if (!msgShow()) {
+         return;
+      }
+
       const editExp = {
          cat_id: cat,
          comment: title,
-         date,
+         date: todayDate,
          amount: parseInt(amount),
       };
       axios
@@ -177,6 +193,14 @@ export const ExpProvider = ({ children }) => {
                setAmount('');
                setTitle('');
                setDate(todayDate);
+               setSuccessMsg(true);
+               setShowMsg(true);
+               setEditing(false);
+               // Set successMsg back to false after 2 seconds
+               setTimeout(() => {
+                  setSuccessMsg(false);
+                  setShowMsg(false);
+               }, 3000);
             }
          })
          .catch((err) => {
@@ -184,8 +208,8 @@ export const ExpProvider = ({ children }) => {
          });
    };
 
-   const handleDelete = (e) => {
-      e.preventDefault();
+   const handleDelete = () => {
+      // e.preventDefault();
       axios
          .delete(`${BASE_URL}/exp/${toEdit}`)
          .then((res) => {
@@ -193,18 +217,19 @@ export const ExpProvider = ({ children }) => {
             setExpenses((prevExpenses) =>
                prevExpenses.filter((expense) => expense.id !== toEdit)
             );
+
             setCat('');
             setAmount('');
             setTitle('');
             setDate(todayDate);
+            setEditing(false);
          })
          .catch((error) => {
             console.warn('ERROR:', error);
          });
    };
 
-   const handleCancel = (e) => {
-      e.preventDefault();
+   const handleCancel = () => {
       setEditing(false);
       setCat('');
       setAmount('');
@@ -241,6 +266,8 @@ export const ExpProvider = ({ children }) => {
             refreshing,
             successMsg,
             setSuccessMsg,
+            showMsg,
+            setShowMsg,
          }}
       >
          {children}

@@ -5,6 +5,7 @@ import { FontAwesome } from '@expo/vector-icons';
 
 import { useContext, useState } from 'react';
 import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
+import { useNavigation } from 'expo-router';
 
 import { ExpContext } from '../components/ExpContext';
 
@@ -39,8 +40,15 @@ export default function Input() {
       todayDate,
       submitHandler,
       successMsg,
-      setSuccessMsg,
+      editing,
+      handleSubmitEdit,
+      handleCancel,
+      handleDelete,
+      showMsg,
+      setShowMsg,
    } = useContext(ExpContext);
+
+   const navigation = useNavigation();
 
    const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
@@ -67,10 +75,8 @@ export default function Input() {
                   fontWeight: '300',
                   fontSize: 18,
                   paddingVertical: 10,
-                  marginVertical: 10,
                   marginHorizontal: 10,
                   borderRadius: 5,
-                  // borderWidth: 1,
                   backgroundColor: '#d9f99d',
                   position: 'absolute',
                   zIndex: 10,
@@ -78,7 +84,9 @@ export default function Input() {
                   right: 0,
                }}
             >
-               Transaction added successfully
+               {showMsg
+                  ? 'Transaction edited successfully'
+                  : 'Transaction added successfully'}
             </Text>
          )}
 
@@ -158,17 +166,61 @@ export default function Input() {
                marginVertical: 30,
             }}
          >
-            <Pressable
-               onPress={submitHandler}
-               style={({ pressed }) => [
-                  {
-                     backgroundColor: pressed ? '#54c2ff' : '#418fff',
-                  },
-                  styles.button,
-               ]}
-            >
-               <Text style={styles.text}>Submit</Text>
-            </Pressable>
+            {!editing && (
+               <Pressable
+                  onPress={submitHandler}
+                  style={({ pressed }) => [
+                     {
+                        backgroundColor: pressed ? '#54c2ff' : '#418fff',
+                     },
+                     styles.button,
+                  ]}
+               >
+                  <Text style={styles.text}>Submit</Text>
+               </Pressable>
+            )}
+            {editing && (
+               <View style={styles.editWrap}>
+                  <Pressable
+                     onPress={handleSubmitEdit}
+                     style={({ pressed }) => [
+                        {
+                           backgroundColor: pressed ? '#bef264' : '#84cc16',
+                        },
+                        styles.button,
+                     ]}
+                  >
+                     <Text style={styles.text}>Confirm</Text>
+                  </Pressable>
+                  <View style={styles.editWrap2}>
+                     <Pressable
+                        onPress={handleDelete}
+                        style={({ pressed }) => [
+                           {
+                              backgroundColor: pressed ? '#fb7185' : '#f43f5e',
+                           },
+                           styles.button,
+                        ]}
+                     >
+                        <Text style={styles.text}>Delete</Text>
+                     </Pressable>
+                     <Pressable
+                        onPress={() => {
+                           handleCancel();
+                           navigation.navigate('index');
+                        }}
+                        style={({ pressed }) => [
+                           {
+                              backgroundColor: pressed ? '#fcd34d' : '#fbbf24',
+                           },
+                           styles.button,
+                        ]}
+                     >
+                        <Text style={styles.text}>Cancel</Text>
+                     </Pressable>
+                  </View>
+               </View>
+            )}
          </View>
       </View>
    );
@@ -213,5 +265,15 @@ const styles = StyleSheet.create({
       lineHeight: 21,
       letterSpacing: 0.25,
       color: 'black',
+   },
+   editWrap: {
+      alignItems: 'center',
+      gap: 10,
+      width: '100%',
+      // flexDirection: 'row',
+   },
+   editWrap2: {
+      flexDirection: 'row',
+      gap: 10,
    },
 });
