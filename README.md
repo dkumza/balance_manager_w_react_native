@@ -1,7 +1,14 @@
 # Show Transactions
 
-client side with React Native for back end with SQL server.
+client side with React Native for backend with SQL server.
 server can be found [here:](https://github.com/dkumza/expenses_sql_react_express)
+
+#### Todo List
+
+-  ~~Fetch Data from API~~
+-  ~~Create new data~~
+-  Edit data
+-  Delete data
 
 ## Installation
 
