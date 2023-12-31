@@ -38,6 +38,8 @@ export default function Input() {
       setDate,
       todayDate,
       submitHandler,
+      successMsg,
+      setSuccessMsg,
    } = useContext(ExpContext);
 
    const onChange = (event, selectedDate) => {
@@ -57,6 +59,29 @@ export default function Input() {
 
    return (
       <View style={styles.container}>
+         {successMsg && (
+            <Text
+               style={{
+                  textAlign: 'center',
+                  color: '#1e293b',
+                  fontWeight: '300',
+                  fontSize: 18,
+                  paddingVertical: 10,
+                  marginVertical: 10,
+                  marginHorizontal: 10,
+                  borderRadius: 5,
+                  // borderWidth: 1,
+                  backgroundColor: '#d9f99d',
+                  position: 'absolute',
+                  zIndex: 10,
+                  left: 0,
+                  right: 0,
+               }}
+            >
+               Transaction added successfully
+            </Text>
+         )}
+
          <View>
             <Text style={{ marginVertical: 5 }}>Select cat</Text>
             <View
@@ -152,6 +177,7 @@ const styles = StyleSheet.create({
    container: {
       flex: 1,
       padding: 24,
+      paddingTop: 0,
       margin: 0,
       gap: 5,
       backgroundColor: '#f8fafc',

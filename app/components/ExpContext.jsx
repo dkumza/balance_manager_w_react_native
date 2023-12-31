@@ -22,6 +22,7 @@ export const ExpProvider = ({ children }) => {
    const [positives, setPositives] = useState(0);
    const [negatives, setNegatives] = useState(0);
    const [refreshing, setRefreshing] = useState(false);
+   const [successMsg, setSuccessMsg] = useState(false);
 
    let todayDate;
    if (date.length === 10) {
@@ -93,13 +94,11 @@ export const ExpProvider = ({ children }) => {
       e.preventDefault();
 
       if (!title.trim()) {
-         Alert.alert('Input warning', 'Please fill comment input', [
-            { text: 'OK' },
-         ]);
+         Alert.alert('Warning:', 'Please fill comment input', [{ text: 'OK' }]);
          return;
       }
       if (!amount.trim()) {
-         Alert.alert('Input warning', 'Please enter transaction amount', [
+         Alert.alert('Warning:', 'Please enter transaction amount', [
             { text: 'OK' },
          ]);
          return;
@@ -114,7 +113,7 @@ export const ExpProvider = ({ children }) => {
          comment: title,
          date: todayDate,
       };
-      console.log(newExp);
+
       axios
          .post(`${BASE_URL}/exp`, newExp)
          .then((res) => {
@@ -129,6 +128,11 @@ export const ExpProvider = ({ children }) => {
                setAmount('');
                setTitle('');
                setDate(todayDate);
+               setSuccessMsg(true);
+               // Set successMsg back to false after 2 seconds
+               setTimeout(() => {
+                  setSuccessMsg(false);
+               }, 3000);
             }
          })
          .catch((err) => {
@@ -235,6 +239,8 @@ export const ExpProvider = ({ children }) => {
             todayDate,
             onRefresh,
             refreshing,
+            successMsg,
+            setSuccessMsg,
          }}
       >
          {children}
