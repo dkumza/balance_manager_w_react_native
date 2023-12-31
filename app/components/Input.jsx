@@ -6,7 +6,7 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useContext, useState } from 'react';
 import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
 
-import { ExpContext, ExpProvider } from '../components/ExpContext';
+import { ExpContext } from '../components/ExpContext';
 
 const shadow = {
    borderWidth: 1,
@@ -37,9 +37,8 @@ export default function Input() {
       date,
       setDate,
       todayDate,
+      submitHandler,
    } = useContext(ExpContext);
-
-   console.log(cat, title, amount, date);
 
    const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
@@ -135,7 +134,7 @@ export default function Input() {
             }}
          >
             <Pressable
-               // onPress={handleSubmit}
+               onPress={submitHandler}
                style={({ pressed }) => [
                   {
                      backgroundColor: pressed ? '#54c2ff' : '#418fff',

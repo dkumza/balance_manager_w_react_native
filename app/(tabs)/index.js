@@ -6,15 +6,13 @@ import { ExpProvider } from '../components/ExpContext';
 
 export default function Index() {
    return (
-      <ExpProvider>
-         <SafeAreaView style={styles.container}>
-            <ScrollView showsVerticalScrollIndicator={false}>
-               {/* Information about balance */}
-               <Balance />
-               <History />
-            </ScrollView>
-         </SafeAreaView>
-      </ExpProvider>
+      <SafeAreaView style={styles.container}>
+         <ScrollView showsVerticalScrollIndicator={false}>
+            {/* Information about balance */}
+            <Balance />
+            <History />
+         </ScrollView>
+      </SafeAreaView>
    );
 }
 

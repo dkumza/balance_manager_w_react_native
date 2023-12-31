@@ -5,14 +5,8 @@ export const ExpContext = createContext();
 
 let BASE_URL;
 // check if connecting from local pc or from physical device
-if (__DEV__) {
-   BASE_URL =
-      Platform.OS === 'android'
-         ? 'http://192.168.32.84:3000/api'
-         : 'http://192.168.32.84:3000/api';
-} else {
-   BASE_URL = 'http://10.0.2.2:3000/api';
-}
+BASE_URL = 'http://10.0.2.2:3000/api'; // if working on pc
+// BASE_URL = `http://192.168.32.84:3000/api`; // if working on physical device
 
 export const ExpProvider = ({ children }) => {
    const [expenses, setExpenses] = useState(null);
@@ -27,9 +21,15 @@ export const ExpProvider = ({ children }) => {
    const [positives, setPositives] = useState(0);
    const [negatives, setNegatives] = useState(0);
 
-   let todayDate = `${date.getFullYear()}-${
-      date.getMonth() + 1
-   }-${date.getDate()}`;
+   console.log(date);
+   let todayDate;
+   if (date.length === 10) {
+      setDate(new Date());
+   } else {
+      todayDate = `${date.getFullYear()}-${
+         date.getMonth() + 1
+      }-${date.getDate()}`;
+   }
 
    useEffect(() => {
       // fetch expenses from DB on page load
@@ -73,6 +73,15 @@ export const ExpProvider = ({ children }) => {
    const submitHandler = (e) => {
       e.preventDefault();
 
+      if (!title.trim()) {
+         alert('Please enter a transaction name');
+         return;
+      }
+      if (!amount.trim()) {
+         alert('Please enter a transaction amount');
+         return;
+      }
+
       // If cat is not "Salary", make amount negative
       let finalAmount = cat !== '4' ? -Math.abs(amount) : parseInt(amount);
 
@@ -80,7 +89,7 @@ export const ExpProvider = ({ children }) => {
          cat_id: cat,
          amount: finalAmount,
          comment: title,
-         date,
+         date: todayDate,
       };
       console.log(newExp);
       axios
