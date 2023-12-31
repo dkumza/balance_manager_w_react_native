@@ -11,7 +11,7 @@ if (__DEV__) {
          ? 'http://192.168.32.84:3000/api'
          : 'http://192.168.32.84:3000/api';
 } else {
-   BASE_URL = 'http://localhost:3000/api';
+   BASE_URL = 'http://10.0.2.2:3000/api';
 }
 
 let today = new Date();

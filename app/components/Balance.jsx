@@ -24,7 +24,7 @@ export default function Balance() {
 }
 const styles = StyleSheet.create({
    totalWrap: {
-      marginTop: 30,
+      marginTop: 10,
       borderWidth: 1,
       borderColor: '#e2e8f0',
       alignItems: 'center',

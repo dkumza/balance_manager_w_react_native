@@ -29,15 +29,14 @@ const shadow = {
    elevation: 5,
 };
 
-let today = new Date();
-let todayDate =
-   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
 export default function New() {
    const [selectedLanguage, setSelectedLanguage] = useState();
-   const [date, setDate] = useState(new Date(1598051730000));
+   const [date, setDate] = useState(new Date());
    const [mode, setMode] = useState('date');
    const [show, setShow] = useState(false);
+
+   let todayDate =
+      date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 
    const onChange = (event, selectedDate) => {
       const currentDate = selectedDate;
@@ -160,10 +159,10 @@ const styles = StyleSheet.create({
    button: {
       alignItems: 'center',
       justifyContent: 'center',
-      paddingVertical: 14,
+      paddingVertical: 18,
       // paddingHorizontal: 5,
       borderRadius: 10,
-      elevation: 3,
+      elevation: 5,
       width: '50%',
    },
 
@@ -177,7 +176,6 @@ const styles = StyleSheet.create({
    textDate: {
       fontSize: 16,
       lineHeight: 21,
-      // fontWeight: 'bold',
       letterSpacing: 0.25,
       color: 'black',
    },

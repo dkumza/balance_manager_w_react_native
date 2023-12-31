@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
       shadowColor: '#94a3b8',
       shadowOffset: {
          width: 0,
-         height: 1,
+         height: 0.5,
       },
       shadowOpacity: 0.1,
       shadowRadius: 10,
-      elevation: 5,
+      elevation: 2,
    },
    liLeft: {
       flexDirection: 'row',
