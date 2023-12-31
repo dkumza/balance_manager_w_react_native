@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState, useCallback } from 'react';
+import { Alert } from 'react-native';
 
 export const ExpContext = createContext();
 
@@ -11,7 +12,7 @@ BASE_URL = 'http://10.0.2.2:3000/api'; // if working on pc
 export const ExpProvider = ({ children }) => {
    const [expenses, setExpenses] = useState(null);
    const [cat, setCat] = useState('1');
-   const [amount, setAmount] = useState(0);
+   const [amount, setAmount] = useState('');
    const [title, setTitle] = useState('');
    const [date, setDate] = useState(new Date());
    const [id, setId] = useState('');
@@ -20,8 +21,8 @@ export const ExpProvider = ({ children }) => {
    const [balance, setBalance] = useState(0);
    const [positives, setPositives] = useState(0);
    const [negatives, setNegatives] = useState(0);
+   const [refreshing, setRefreshing] = useState(false);
 
-   console.log(date);
    let todayDate;
    if (date.length === 10) {
       setDate(new Date());
@@ -31,8 +32,7 @@ export const ExpProvider = ({ children }) => {
       }-${date.getDate()}`;
    }
 
-   useEffect(() => {
-      // fetch expenses from DB on page load
+   function fetchData() {
       axios
          .get(`${BASE_URL}/exp_all`)
          .then((res) => {
@@ -47,6 +47,11 @@ export const ExpProvider = ({ children }) => {
          .catch((err) => {
             console.warn('ERROR: ', err);
          });
+   }
+
+   useEffect(() => {
+      // fetch expenses from DB on page load
+      fetchData();
    }, []);
 
    useEffect(() => {
@@ -69,16 +74,34 @@ export const ExpProvider = ({ children }) => {
       }
    }, [expenses, setBalance, setNegatives, setPositives]);
 
+   // handles refresh screen
+   const onRefresh = useCallback(() => {
+      handleRefresh();
+      setRefreshing(true);
+      setTimeout(() => {
+         setRefreshing(false);
+      }, 1000);
+   }, []);
+
+   const handleRefresh = () => {
+      // fetch expenses from DB on page load
+      fetchData();
+   };
+
    // handles new expense
    const submitHandler = (e) => {
       e.preventDefault();
 
       if (!title.trim()) {
-         alert('Please enter a transaction name');
+         Alert.alert('Input warning', 'Please fill comment input', [
+            { text: 'OK' },
+         ]);
          return;
       }
       if (!amount.trim()) {
-         alert('Please enter a transaction amount');
+         Alert.alert('Input warning', 'Please enter transaction amount', [
+            { text: 'OK' },
+         ]);
          return;
       }
 
@@ -210,6 +233,8 @@ export const ExpProvider = ({ children }) => {
             negatives,
             handleCancel,
             todayDate,
+            onRefresh,
+            refreshing,
          }}
       >
          {children}
