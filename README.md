@@ -12,7 +12,7 @@ server can be found [here:](https://github.com/dkumza/expenses_sql_react_express
 
 ## Installation
 
-To install the application, follow these steps:
+
 
 1. Clone the repository.
 
@@ -20,7 +20,7 @@ To install the application, follow these steps:
 
 ## Running the Application
 
-To run the application, follow these steps:
+
 
 1. Run `npm start` to start the server.
 
