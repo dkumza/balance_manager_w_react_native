@@ -14,22 +14,22 @@ if (__DEV__) {
    BASE_URL = 'http://10.0.2.2:3000/api';
 }
 
-let today = new Date();
-let todayDate =
-   today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-
 export const ExpProvider = ({ children }) => {
    const [expenses, setExpenses] = useState(null);
    const [cat, setCat] = useState('1');
    const [amount, setAmount] = useState(0);
    const [title, setTitle] = useState('');
-   const [date, setDate] = useState(todayDate);
+   const [date, setDate] = useState(new Date());
    const [id, setId] = useState('');
    const [toEdit, setToEdit] = useState(null);
    const [editing, setEditing] = useState(false);
    const [balance, setBalance] = useState(0);
    const [positives, setPositives] = useState(0);
    const [negatives, setNegatives] = useState(0);
+
+   let todayDate = `${date.getFullYear()}-${
+      date.getMonth() + 1
+   }-${date.getDate()}`;
 
    useEffect(() => {
       // fetch expenses from DB on page load
@@ -200,6 +200,7 @@ export const ExpProvider = ({ children }) => {
             positives,
             negatives,
             handleCancel,
+            todayDate,
          }}
       >
          {children}
