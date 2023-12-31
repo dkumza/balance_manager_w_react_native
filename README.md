@@ -1,13 +1,20 @@
-# Expo Router Example
+# Show Transactions
 
-Use [`expo-router`](https://docs.expo.dev/router/introduction/) to build native navigation using files in the `app/` directory.
+client side with React Native for back end with SQL server.
+server can be found [here:](https://github.com/dkumza/expenses_sql_react_express)
 
-## 🚀 How to use
+## Installation
 
-```sh
-npx create-expo-app -e with-router
-```
+To install the application, follow these steps:
 
-## 📝 Notes
+1. Clone the repository.
 
-- [Expo Router: Docs](https://docs.expo.dev/router/introduction/)
+2. Navigate to the downloaded folder and run `npm install` to install dependencies.
+
+## Running the Application
+
+To run the application, follow these steps:
+
+1. Run `npm start` to start the server.
+
+2. Fallow instructions in terminal

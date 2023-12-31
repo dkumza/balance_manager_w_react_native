@@ -176,8 +176,8 @@ export default function Input() {
 const styles = StyleSheet.create({
    container: {
       flex: 1,
-      padding: 24,
-      paddingTop: 0,
+      paddingHorizontal: 24,
+      marginTop: 10,
       margin: 0,
       gap: 5,
       backgroundColor: '#f8fafc',
