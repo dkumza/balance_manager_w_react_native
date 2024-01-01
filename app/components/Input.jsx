@@ -8,6 +8,7 @@ import { Text, View, TextInput, Pressable, StyleSheet } from 'react-native';
 import { useNavigation } from 'expo-router';
 
 import { ExpContext } from '../components/ExpContext';
+import Messages from './Messages';
 
 const shadow = {
    borderWidth: 1,
@@ -39,13 +40,10 @@ export default function Input() {
       setDate,
       todayDate,
       submitHandler,
-      successMsg,
       editing,
       handleSubmitEdit,
       handleCancel,
-      handleDelete,
-      showMsg,
-      setShowMsg,
+      handleAlert,
    } = useContext(ExpContext);
 
    const navigation = useNavigation();
@@ -67,29 +65,7 @@ export default function Input() {
 
    return (
       <View style={styles.container}>
-         {successMsg && (
-            <Text
-               style={{
-                  textAlign: 'center',
-                  color: '#1e293b',
-                  fontWeight: '300',
-                  fontSize: 18,
-                  paddingVertical: 10,
-                  marginHorizontal: 10,
-                  borderRadius: 5,
-                  backgroundColor: '#d9f99d',
-                  position: 'absolute',
-                  zIndex: 10,
-                  left: 0,
-                  right: 0,
-               }}
-            >
-               {showMsg
-                  ? 'Transaction edited successfully'
-                  : 'Transaction added successfully'}
-            </Text>
-         )}
-
+         <Messages />
          <View>
             <Text style={{ marginVertical: 5 }}>Select cat</Text>
             <View
@@ -194,7 +170,7 @@ export default function Input() {
                   </Pressable>
                   <View style={styles.editWrap2}>
                      <Pressable
-                        onPress={handleDelete}
+                        onPress={handleAlert}
                         style={({ pressed }) => [
                            {
                               backgroundColor: pressed ? '#fb7185' : '#f43f5e',

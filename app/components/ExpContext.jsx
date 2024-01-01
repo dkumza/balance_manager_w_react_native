@@ -1,4 +1,6 @@
 import axios from 'axios';
+import 'react-native-get-random-values';
+import { v4 as uuid } from 'uuid';
 import { createContext, useEffect, useState, useCallback } from 'react';
 import { Alert } from 'react-native';
 
@@ -22,11 +24,11 @@ export const ExpProvider = ({ children }) => {
    const [positives, setPositives] = useState(0);
    const [negatives, setNegatives] = useState(0);
    const [refreshing, setRefreshing] = useState(false);
-   const [successMsg, setSuccessMsg] = useState(false);
-   const [showMsg, setShowMsg] = useState(false);
+   const [messages, setMessages] = useState([]);
 
    let todayDate;
-   if (date.length === 10) {
+
+   if (date.length < 11) {
       setDate(new Date());
    } else {
       todayDate = `${date.getFullYear()}-${
@@ -138,11 +140,7 @@ export const ExpProvider = ({ children }) => {
                setAmount('');
                setTitle('');
                setDate(todayDate);
-               setSuccessMsg(true);
-               // Set successMsg back to false after 2 seconds
-               setTimeout(() => {
-                  setSuccessMsg(false);
-               }, 3000);
+               addMessage('success', 'Created successfully');
             }
          })
          .catch((err) => {
@@ -193,14 +191,8 @@ export const ExpProvider = ({ children }) => {
                setAmount('');
                setTitle('');
                setDate(todayDate);
-               setSuccessMsg(true);
-               setShowMsg(true);
                setEditing(false);
-               // Set successMsg back to false after 2 seconds
-               setTimeout(() => {
-                  setSuccessMsg(false);
-                  setShowMsg(false);
-               }, 3000);
+               addMessage('success', 'Edited successfully');
             }
          })
          .catch((err) => {
@@ -223,6 +215,7 @@ export const ExpProvider = ({ children }) => {
             setTitle('');
             setDate(todayDate);
             setEditing(false);
+            addMessage('success', 'Deleted successfully');
          })
          .catch((error) => {
             console.warn('ERROR:', error);
@@ -235,6 +228,21 @@ export const ExpProvider = ({ children }) => {
       setAmount('');
       setTitle('');
       setDate(todayDate);
+   };
+
+   const handleAlert = () => {
+      Alert.alert('Warning:', 'Are you sure to DELETE?', [
+         { text: 'Yes', onPress: () => handleDelete() },
+         { text: 'No' },
+      ]);
+   };
+
+   const addMessage = (type, text) => {
+      const id = uuid();
+      setMessages((m) => [{ id, type, text }, ...m]);
+      setTimeout(() => {
+         setMessages((m) => m.filter((message) => message.id !== id));
+      }, 3000);
    };
 
    return (
@@ -264,10 +272,8 @@ export const ExpProvider = ({ children }) => {
             todayDate,
             onRefresh,
             refreshing,
-            successMsg,
-            setSuccessMsg,
-            showMsg,
-            setShowMsg,
+            handleAlert,
+            messages,
          }}
       >
          {children}
