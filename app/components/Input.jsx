@@ -123,13 +123,7 @@ export default function Input() {
                         onChange={onChange}
                      />
                   )}
-                  <View
-                     style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                     }}
-                  >
+                  <View style={styles.calWrap}>
                      <Text style={styles.textDate}>{todayDate}</Text>
                      <FontAwesome name="calendar" size={12} color="black" />
                   </View>
@@ -251,5 +245,10 @@ const styles = StyleSheet.create({
    editWrap2: {
       flexDirection: 'row',
       gap: 10,
+   },
+   calWrap: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
    },
 });

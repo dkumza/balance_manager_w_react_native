@@ -136,7 +136,7 @@ export const ExpProvider = ({ children }) => {
                newExp.id = idFromServer;
                // Add the new expense to the state
                setExpenses((prevExpenses) => [...prevExpenses, newExp]);
-               setCat('');
+               setCat('1');
                setAmount('');
                setTitle('');
                setDate(todayDate);
@@ -242,7 +242,7 @@ export const ExpProvider = ({ children }) => {
       setMessages((m) => [{ id, type, text }, ...m]);
       setTimeout(() => {
          setMessages((m) => m.filter((message) => message.id !== id));
-      }, 3000);
+      }, 1000);
    };
 
    return (
