@@ -44,6 +44,8 @@ export default function Input() {
       handleSubmitEdit,
       handleCancel,
       handleAlert,
+      allCats,
+      setAllCats,
    } = useContext(ExpContext);
 
    const navigation = useNavigation();
@@ -77,10 +79,14 @@ export default function Input() {
                   selectedValue={cat}
                   onValueChange={(itemValue, itemIndex) => setCat(itemValue)}
                >
-                  <Picker.Item label="Food" value="1" />
-                  <Picker.Item label="House" value="2" />
-                  <Picker.Item label="Health" value="3" />
-                  <Picker.Item label="Salary" value="4" />
+                  {allCats &&
+                     allCats.map((item) => (
+                        <Picker.Item
+                           key={item.cat_id}
+                           label={item.cat_name}
+                           value={item.cat_id}
+                        />
+                     ))}
                </Picker>
             </View>
          </View>

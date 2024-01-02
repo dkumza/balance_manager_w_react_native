@@ -11,9 +11,12 @@ let BASE_URL;
 BASE_URL = 'http://10.0.2.2:3000/api'; // if working on pc
 // BASE_URL = `http://192.168.32.84:3000/api`; // if working on physical device
 
+const CATS_URL = `http://10.0.2.2:3000/api/cats`;
+
 export const ExpProvider = ({ children }) => {
    const [expenses, setExpenses] = useState(null);
    const [cat, setCat] = useState('1');
+   const [allCats, setAllCats] = useState(null);
    const [amount, setAmount] = useState('');
    const [title, setTitle] = useState('');
    const [date, setDate] = useState(new Date());
@@ -59,6 +62,18 @@ export const ExpProvider = ({ children }) => {
    useEffect(() => {
       // fetch expenses from DB on page load
       fetchData();
+   }, []);
+
+   useEffect(() => {
+      // fetch expenses categories from db
+      axios
+         .get(CATS_URL)
+         .then((res) => {
+            setAllCats(res.data);
+         })
+         .catch((err) => {
+            console.warn('ERROR: ', err);
+         });
    }, []);
 
    useEffect(() => {
@@ -277,6 +292,8 @@ export const ExpProvider = ({ children }) => {
             refreshing,
             handleAlert,
             messages,
+            allCats,
+            setAllCats,
          }}
       >
          {children}
