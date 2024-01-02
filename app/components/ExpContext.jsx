@@ -31,9 +31,9 @@ export const ExpProvider = ({ children }) => {
    if (date.length < 11) {
       setDate(new Date());
    } else {
-      todayDate = `${date.getFullYear()}-${
-         date.getMonth() + 1
-      }-${date.getDate()}`;
+      todayDate = `${date.getFullYear()}-${('0' + (date.getMonth() + 1)).slice(
+         -2
+      )}-${('0' + date.getDate()).slice(-2)}`;
    }
 
    function fetchData() {
@@ -43,7 +43,10 @@ export const ExpProvider = ({ children }) => {
             if (res.data.length === 0) return;
             let formattedExpenses = res.data.map((expense) => {
                let date = new Date(expense.date);
-               let formattedDate = date.toISOString().split('T')[0];
+               let formattedDate = `${date.getFullYear()}-${(
+                  '0' +
+                  (date.getMonth() + 1)
+               ).slice(-2)}-${('0' + date.getDate()).slice(-2)}`;
                return { ...expense, date: formattedDate };
             });
             setExpenses(formattedExpenses);
