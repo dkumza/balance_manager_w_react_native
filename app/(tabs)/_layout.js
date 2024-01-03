@@ -8,32 +8,13 @@ const TabsLayout = () => {
       <ExpProvider>
          <Tabs>
             <Tabs.Screen
-               name="logIn"
-               options={{
-                  headerTitle: 'Sign In',
-                  title: 'Sign In',
-                  headerStatusBarHeight: 1,
-                  headerTitleAlign: 'center',
-                  headerStyle: { backgroundColor: '#ccfbf1' },
-                  tabBarStyle: { backgroundColor: '#ccfbf1' },
-                  tabBarLabelStyle: { color: 'black' },
-                  tabBarIcon: ({ focused, color, size }) => (
-                     <FontAwesome
-                        name="balance-scale"
-                        size={18}
-                        color={focused ? 'black' : 'gray'}
-                     />
-                  ),
-               }}
-            />
-            <Tabs.Screen
                name="index"
                options={{
                   headerTitle: 'Overview',
                   title: 'Overview',
                   headerStatusBarHeight: 1,
                   headerTitleAlign: 'center',
-                  headerStyle: { backgroundColor: '#ccfbf1' },
+                  headerStyle: { backgroundColor: '#f8fafc' },
                   tabBarStyle: { backgroundColor: '#ccfbf1' },
                   tabBarLabelStyle: { color: 'black' },
                   tabBarIcon: ({ focused, color, size }) => (
@@ -52,7 +33,7 @@ const TabsLayout = () => {
                   title: 'Manage',
                   headerStatusBarHeight: 1,
                   headerTitleAlign: 'center',
-                  headerStyle: { backgroundColor: '#cffafe' },
+                  headerStyle: { backgroundColor: '#f8fafc' },
                   tabBarStyle: { backgroundColor: '#cffafe', color: 'black' },
                   tabBarLabelStyle: { color: 'black' },
                   tabBarIcon: ({ focused, color, size }) => (

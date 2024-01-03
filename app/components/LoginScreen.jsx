@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
       flex: 1,
       justifyContent: 'flex-end',
       alignItems: 'center',
+      backgroundColor: '#f8fafc',
    },
    left: {
       flex: 1,
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
       //   padding: 12,
       borderRadius: 15,
       width: '100%',
-      backgroundColor: 'white',
+      backgroundColor: '#f8fafc',
       paddingVertical: 24,
       //   justifyContent: 'center',
       alignItems: 'center',
