@@ -1,7 +1,7 @@
 import { Tabs } from 'expo-router';
 
 import { FontAwesome } from '@expo/vector-icons';
-import { ExpProvider } from '../components/ExpContext';
+import { ExpProvider } from '../../components/ExpContext';
 
 const TabsLayout = () => {
    return (

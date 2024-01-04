@@ -1,7 +1,7 @@
 import { StyleSheet, SafeAreaView } from 'react-native';
 
-import Balance from '../components/Balance';
-import History from '../components/History';
+import Balance from '../../components/Balance';
+import History from '../../components/History';
 
 export default function Index() {
    return (
